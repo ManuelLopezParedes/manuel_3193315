@@ -2,10 +2,13 @@ const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 
+
 const app = express();
 
 // Configuración para el uso de peticiones POST
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static(__dirname + '/views'));
 
 // Plantillas dinámicas
 app.set('view engine', 'ejs');
@@ -16,7 +19,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root', // tu usuario de MySQL
     password: '', // tu contraseña de MySQL
-    database: 'proyectoSI',
+    database: 'proyecto',
     port: 3306
 });
 
@@ -50,9 +53,9 @@ app.get('/', (req, res) => {
 
 // Agregar usuarios
 app.post('/add', (req, res) => {
-    const { name, email } = req.body;
-    const query = 'INSERT INTO users (name, email) VALUES (?, ?)';
-    db.query(query, [name, email], (err) => {
+    const { num_cuenta, nombre, apellido_P, apellido_M, carrera, correo, telefono, semestre } = req.body;
+    const query = 'INSERT INTO users (num_cuenta, nombre, apellido_P, apellido_M, carrera, correo, telefono, semestre) VALUES (?, ?, ?, ? ,? ,?, ?, ?)';
+    db.query(query, [num_cuenta, nombre, apellido_P, apellido_M, carrera, correo, telefono, semestre], (err) => {
         if (err) {
             console.error('Error adding user:', err);
             res.send('Error');
@@ -63,10 +66,10 @@ app.post('/add', (req, res) => {
 });
 
 // Editar usuario
-app.get('/edit/:id', (req, res) => {
-    const { id } = req.params;
-    const query = 'SELECT * FROM users WHERE id = ?';
-    db.query(query, [id], (err, results) => {
+app.get('/edit/:num_cuenta', (req, res) => {
+    const { num_cuenta } = req.params;
+    const query = 'SELECT * FROM users WHERE num_cuenta = ?';
+    db.query(query, [num_cuenta], (err, results) => {
         if (err) {
             console.error('Error fetching user:', err);
             res.send('Error');
@@ -78,11 +81,11 @@ app.get('/edit/:id', (req, res) => {
 
 
 // Editar usuario - Ruta POST para guardar los cambios
-app.post('/edit/:id', (req, res) => {
-    const { id } = req.params;
-    const { name, email } = req.body;
-    const query = 'UPDATE users SET name = ?, email = ? WHERE id = ?';
-    db.query(query, [name, email, id], (err) => {
+app.post('/edit/:num_cuenta', (req, res) => {
+    const { num_cuenta } = req.params;
+    const {nombre, apellido_P, apellido_M, carrera, correo, telefono, semestre} = req.body;
+    const query = 'UPDATE users SET nombre= ?, apellido_P = ?, apellido_M = ?, carrera = ?, correo = ?, telefono = ?, semestre = ?  WHERE num_cuenta = ?';
+    db.query(query, [nombre, apellido_P, apellido_M, carrera, correo, telefono, semestre, num_cuenta], (err) => {
         if (err) {
             console.error('Error updating user:', err);
             res.send('Error');
@@ -93,10 +96,10 @@ app.post('/edit/:id', (req, res) => {
 });
 
 // Eliminar usuario
-app.get('/delete/:id', (req, res) => {
-    const { id } = req.params;
-    const query = 'DELETE FROM users WHERE id = ?';
-    db.query(query, [id], (err) => {
+app.get('/delete/:num_cuenta', (req, res) => {
+    const { num_cuenta } = req.params;
+    const query = 'DELETE FROM users WHERE num_cuenta = ?';
+    db.query(query, [num_cuenta], (err) => {
         if (err) {
             console.error('Error deleting user:', err);
             res.send('Error');

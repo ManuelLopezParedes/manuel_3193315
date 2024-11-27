@@ -3,38 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD con Node.js y MySQL</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Proyecto web 2</title>
+    <link rel="stylesheet" href="/estilos/styles.css">
 </head>
 <body>
-    <h1>Lista de Usuarios</h1>
+    <section class="formulario">
+    <h2>Agregar Nuevo Usuario</h2>
+        <form class="registro" action="/add" method="POST">
+            <input class="campo" type="text" id="num_cuenta" name="num_cuenta" placeholder="Numero de cuenta" maxlength="9" pattern="\d{0,9}" required>
+            <br>
+            <input class="campo" type="text" id="nombre" name="nombre" placeholder="Nombre(s)" maxlength="50" pattern="[a-zA-Z ]+" required>
+            <br>
+            <input class="campo" type="text" id="apellido_P" name="apellido_P" placeholder="Apellido Paterno" maxlength="50" pattern="[a-zA-Z ]+" required>
+            <br>
+            <input class="campo" type="text" id="apellido_M" name="apellido_M" placeholder="Apellido Materno" maxlength="50" pattern="[a-zA-Z ]+" required>
+            <br>
+            <select id="carrera" name="carrera" aria-placeholder="Carrera" required>
+                <option value="" disabled selected>Carrera</option>
+                <optgroup label="Ciencias Físico-Matemáticas y de las Ingenierías">
+                <option value="Ingenieria Civil">Ingeniería Civil</option>
+                <option value="Ingenieria en Computación">Ingeniería en Computación</option>
+                <option value="Ingenieria Electrica Electrónica">Ingeniería Eléctrica Electronica</option>
+                <option value="Ingenieria Industrial">Ingeniería Industrial</option>
+                <option value="Ingenieria Mecánica">Ingeniería Mecanica</option>
+                <optgroup label="Ciencias Sociales">
+                <option value="Comunicación y Periodismo">Comunicación y Periodismo</option>
+                <option value="Derecho">Derecho</option>
+                <option value="Economía">Economía</option>
+                <option value="Planificación para el Desarrollo">Planificacion para el Desarrollo</option>
+                <option value="Relaciones Internacionales">Relaciones Internacionales</option>>
+                <option value="Sociología">Sociología</option>
+                <optgroup label="Humanidades y Artes">
+                <option value="Arquitectura">Arquitectura</option>
+                <option value="Diseño Industrial">Diseño Industrial</option>
+                <option value="Pedagogía">Pedagogía</option>
+            </select>
+            <br>
+            <input class="campo" type="email" id="correo" name="correo" placeholder="Correo" maxlength="50" required>
+            <br>
+            <input class="campo" type="text" id="telefono" name="telefono" placeholder="Telefono" maxlength="10" pattern="\d{1,10}" required>
+            <br>
+            <input class="campo" type="text" id="semestre" name="semestre" placeholder="Semestre" maxlength="2" pattern="\d{1,10}" required>
+            <br>
+            <button class="boton" type="submit">Agregar</button>
+        </form>
+    </section>
+
     <table>
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Email</th>
+            <th>Num_cuenta</th>
+            <th>Nombre(s)</th>
+            <th>Apellido_Paterno</th>
+            <th>Apellido_Materno</th>
+            <th>Carrera</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+            <th>Semestre</th>
             <th>Acciones</th>
         </tr>
         <% users.forEach(user => { %>
         <tr>
-            <td><%= user.id %></td>
-            <td><%= user.name %></td>
-            <td><%= user.email %></td>
+            <td><%= user.num_cuenta %></td>
+            <td><%= user.nombre %></td>
+            <td><%= user.apellido_P %></td>
+            <td><%= user.apellido_M %></td>
+            <td><%= user.carrera %></td>
+            <td><%= user.correo %></td>
+            <td><%= user.telefono %></td>
+            <td><%= user.semestre %></td>
             <td>
-                <a href="/edit/<%= user.id %>">Editar</a> |
-                <a href="/delete/<%= user.id %>">Eliminar</a>
+                <a href="/edit/<%= user.num_cuenta %>">Editar</a> |
+                <a href="/delete/<%= user.num_cuenta %>">Eliminar</a>
             </td>
         </tr>
         <% }); %>
     </table>
-
-    <h2>Agregar Nuevo Usuario</h2>
-    <form action="/add" method="POST">
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <button type="submit">Agregar</button>
-    </form>
 </body>
 </html>

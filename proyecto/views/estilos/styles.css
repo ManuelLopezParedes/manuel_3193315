@@ -1,0 +1,91 @@
+body {
+    background-image:url(imagenes/mural2.webp);
+        background-repeat: no-repeat; /* Evita la repetición de la imagen */
+        background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+        background-position: center center; /* Centra la imagen */
+        background-attachment: fixed; /* Fija la imagen de fondo para que no se mueva al hacer scroll */
+}
+
+.formulario {
+    width: 400px;
+    background: #7895a6;
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    font-family: 'calibri';
+}
+
+.formulario h2 {
+    color: #c5ccc7;
+    font-size: 22px;
+    margin-bottom: 20px;
+    margin-top: 0%;
+    text-align: center;
+}
+
+.campo {
+    width: 95%;
+    background: #c5ccc7;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #305462;
+    font-family: 'calibri';
+    font-size: 18px;
+    color: black;
+}
+
+select {
+    width: 100%;
+    background: #c5ccc7;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #305462;
+    font-family: 'calibri';
+    font-size: 18px;
+    color: #777;
+}
+
+select option {
+    background: #c5ccc7;
+    color: black;
+}
+
+.boton {
+    width: 100%;
+    background: #c5ccc7;
+    border: none;
+    padding: 12px;
+    color: #7895a6;
+    margin: 16px 0;
+    font-size: 16px;
+}
+
+table{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+th{
+    background-color: #7895a6;
+    border: 2px solid #305462;
+    color: #c5ccc7;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+td,tr {
+    border: 2px solid #305462;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #c5ccc7;
+    text-align: center;
+}
